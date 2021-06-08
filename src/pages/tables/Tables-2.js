@@ -18,7 +18,7 @@ export default function Tables2() {
           if (snap.exists) {
             if (isMounted) {
               let tempData = snap.data();
-              let finalTemp = [tempData.TypeValue, tempData.Name, tempData.PhoneNumber, tempData.Email, tempData.Subject, tempData.Message]
+              let finalTemp = [tempData.TypeValue, tempData.Name, tempData.PhoneNumber, tempData.Email, tempData.Subject, tempData.Message, tempData.curTime]
               setTableData(prevState => [...prevState, finalTemp])
             }
           }
@@ -39,7 +39,7 @@ export default function Tables2() {
           <MUIDataTable
             title="Users Signed Up"
             data={tableData}
-            columns={["Type of User", "Name", "Phone Number", "Email", "Subject", "Message"]}
+            columns={["Type of User", "Name", "Phone Number", "Email", "Subject", "Message", "Form Time"]}
             options={{
               filterType: "checkbox",
             }}
