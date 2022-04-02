@@ -10,30 +10,32 @@ export default function Tables2() {
   useEffect(() => {
     let isMounted = true;
     const fetchData = async () => {
-      await firestore.collection("/SignUpForm").onSnapshot(async (snapshot) => {
-        if (isMounted) {
-          setTableData([]);
-        }
-        snapshot.forEach((snap) => {
-          if (snap.exists) {
-            if (isMounted) {
-              let tempData = snap.data();
-              let finalTemp = [
-                tempData.formid,
-                tempData.TypeValue,
-                tempData.Name,
-                tempData.PhoneNumber,
-                tempData.Email,
-                tempData.Subject,
-                tempData.Message,
-                tempData.curTime,
-                tempData.curDate,
-              ];
-              setTableData((prevState) => [...prevState, finalTemp]);
-            }
+      await firestore
+        .collection("/SignUpForm")
+        .orderBy("timestamp", "desc")
+        .onSnapshot(async (snapshot) => {
+          if (isMounted) {
+            setTableData([]);
           }
+          snapshot.forEach((snap) => {
+            if (snap.exists) {
+              if (isMounted) {
+                let tempData = snap.data();
+                let finalTemp = [
+                  tempData.TypeValue,
+                  tempData.Name,
+                  tempData.PhoneNumber,
+                  tempData.Email,
+                  tempData.Subject,
+                  tempData.Message,
+                  tempData.curTime,
+                  tempData.curDate,
+                ];
+                setTableData((prevState) => [...prevState, finalTemp]);
+              }
+            }
+          });
         });
-      });
     };
     fetchData();
 
@@ -50,7 +52,6 @@ export default function Tables2() {
             title="Users Signed Up"
             data={tableData}
             columns={[
-              "ID",
               "Type of User",
               "Name",
               "Phone Number",
