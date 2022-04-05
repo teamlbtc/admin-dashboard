@@ -29,6 +29,8 @@ export default function Tables() {
                   tempData.Email,
                   tempData.Subject,
                   tempData.Message,
+                  tempData.curTime,
+                  tempData.curDate,
                 ];
                 setTableData((prevState) => [...prevState, finalTemp]);
               }
@@ -51,7 +53,15 @@ export default function Tables() {
           <MUIDataTable
             title="Contact Us"
             data={tableData}
-            columns={["First Name", "Last name", "Email", "Subject", "Message"]}
+            columns={[
+              "First Name",
+              "Last name",
+              "Email",
+              "Subject",
+              "Message",
+              "Time",
+              "Date",
+            ]}
             options={{
               filterType: "checkbox",
             }}
